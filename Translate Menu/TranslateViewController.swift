@@ -31,7 +31,7 @@ class TranslateViewController: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     webView.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25"
-    webView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: "https://translate.google.com")!))
+    webView.mainFrame.load(URLRequest(url: URL(string: "https://translate.google.com")!))
   }
 }
 
@@ -39,13 +39,13 @@ class TranslateViewController: NSViewController {
 
 extension TranslateViewController {
 
-    func dialogOKCancel(question: String, text: String) -> Bool {
+    func dialogOKCancel(_ question: String, text: String) -> Bool {
         let myPopup: NSAlert = NSAlert()
         myPopup.messageText = question
         myPopup.informativeText = text
-        myPopup.alertStyle = NSAlertStyle.WarningAlertStyle
-        myPopup.addButtonWithTitle("Quit")
-        myPopup.addButtonWithTitle("Cancel")
+//        myPopup.alertStyle = NSAlertStyle.WarningAlertStyle
+        myPopup.addButton(withTitle: "Quit")
+        myPopup.addButton(withTitle: "Cancel")
         let res = myPopup.runModal()
         if res == NSAlertFirstButtonReturn {
             return true
@@ -54,10 +54,10 @@ extension TranslateViewController {
     }
 
     
-    @IBAction func clickExit(sender: AnyObject) {
+    @IBAction func clickExit(_ sender: AnyObject) {
         let answer = dialogOKCancel("MenuTranslate", text: "Do you want to quit?")
         if (answer){
-        NSApplication.sharedApplication().terminate(self)
+        NSApplication.shared().terminate(self)
         }
     }
 }
