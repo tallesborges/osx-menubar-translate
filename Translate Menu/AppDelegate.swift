@@ -45,13 +45,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         eventMonitor?.start()
         
+        loadCookies()
+        
         NSApplication.shared().servicesProvider = self
-        
-        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+        saveCookies()
     }
     
     func togglePopover(_ sender: AnyObject?) {
